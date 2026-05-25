@@ -1,11 +1,9 @@
 import random
 
 
-
-
 questions = 5
 Incorrect_answer = 0
-questions_answered = 0
+num_questions = 0
 Correct_Answer = 0
 # checks for an integer with optional upper /
 # lower limits and an optional exit code for infinite mode
@@ -113,9 +111,9 @@ else:
 while True:
     # Rounds headings (based on mode)
     if mode == "infinite":
-        rounds_heading = f"\n♾♾♾ Round {questions_answered + 1} (Infinite Mode) ♾♾♾"
+        rounds_heading = f"\n♾♾♾ Round {num_questions + 1} (Infinite Mode) ♾♾♾"
     else:
-        rounds_heading = f"\n💿💿💿 Round {questions_answered + 1} of {num_rounds} 💿💿💿"
+        rounds_heading = f"\n💿💿💿 Round {num_questions + 1} of {num_rounds} 💿💿💿"
 
     random_operation = random.choice(operations)
 
@@ -141,11 +139,11 @@ while True:
     if user_answer == answer:
         print("Correct!")
         Correct_Answer += 1
-        questions_answered += 1
+        num_questions += 1
     else:
         print(f"Wrong! The answer was {answer}")
         Incorrect_answer += 1
-        questions_answered += 1
+        num_questions += 1
 
         # if users are in infinite mode, increase number of rounds
         if mode == "infinite":
