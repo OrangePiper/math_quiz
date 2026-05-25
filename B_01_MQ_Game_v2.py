@@ -2,14 +2,15 @@ import random
 
 
 
-score = 0
+
 questions = 5
 Incorrect_answer = 0
-rounds_played = 0
+questions_answered = 0
+Correct_Answer = 0
 # checks for an integer with optional upper /
 # lower limits and an optional exit code for infinite mode
 # / quitting the game
-def int_check(question, low= 1, exit_code= "xxx"):
+def int_check(question, low= None, high=None, exit_code= "xxx"):
     # if any integer is allowed...
     if low is None and high is None:
         error = "Please enter an integer"
@@ -73,6 +74,7 @@ want_instructions = yes_no("Do you want to read the instructions? ")
 num_rounds = int_check("Rounds <enter for infinite mode.: ",
                        low=1, exit_code="xxx")
 
+
 if num_rounds == "":
     mode = "infinite"
     num_rounds = 5
@@ -106,7 +108,15 @@ else:
     operations = ["+", "-", "*", "/"]
     low, high = 10, 100
 
-for i in range(questions):
+
+# Game loop starts here
+while True:
+    # Rounds headings (based on mode)
+    if mode == "infinite":
+        rounds_heading = f"\n♾♾♾ Round {questions_answered + 1} (Infinite Mode) ♾♾♾"
+    else:
+        rounds_heading = f"\n💿💿💿 Round {questions_answered + 1} of {num_rounds} 💿💿💿"
+
     random_operation = random.choice(operations)
 
     # Generate numbers
@@ -130,12 +140,17 @@ for i in range(questions):
     # Check the answer
     if user_answer == answer:
         print("Correct!")
-        score += 1
-        rounds_played += 1
+        Correct_Answer += 1
+        questions_answered += 1
     else:
         print(f"Wrong! The answer was {answer}")
         Incorrect_answer += 1
-        rounds_played += 1
+        questions_answered += 1
+
+        # if users are in infinite mode, increase number of rounds
+        if mode == "infinite":
+            num_questions += 1
+
 
 
 
